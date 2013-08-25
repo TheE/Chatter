@@ -1,0 +1,7 @@
+chat:
+  format: '&7[%prefix]%suffix %player&7:&f %message'
+  colourChar: '&'
+messages:
+  onJoin: '&6%player has joined the game.'
+  onFirstJoin: '&6%player has joined the game for the first time. Give him a warm welcome.'
+  onQuit: '&6%player has left the game.'

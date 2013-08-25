@@ -1,0 +1,23 @@
+name: Chatter
+version: ${project.version}
+description: A lightwave chat-formatting plugin for bPermissions only.
+author: thee
+depend:
+  - bPermissions
+main: de.minehattan.chatter.Chatter
+commands:
+  chatter:
+    description: 'The one and only command for Chatter'
+    usage: 'Use /chatter reload to reload the configuration file'
+permissions:
+  chatter.reload:
+    description: Can reload the configuration
+    default: op
+  chatter.colour:
+    description: Can write colored chat-messages
+    default: op
+  chatter.*:
+    description: Full access
+    children:
+      chatter.reload: true
+      chatter.colour: true
