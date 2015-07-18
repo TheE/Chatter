@@ -16,31 +16,3 @@
  * You should have received a copy of the GNU General Public License
  * along with Chatter. If not, see <http://www.gnu.org/licenses/>.
  */
-
-package de.minehattan.chatter;
-
-import org.bukkit.entity.Player;
-
-/**
- * Provides all methods that metadata-providers need to have source the plugin's
- * logic
- */
-public interface MetadataProvider {
-
-  /**
-   * Gets the player's prefix
-   *
-   * @param player the player
-   * @return the effective prefix
-   */
-  String getPrefix(Player player);
-
-  /**
-   * Gets the player's suffix
-   *
-   * @param player the player
-   * @return the effective suffix
-   */
-  String getSuffix(Player player);
-
-}

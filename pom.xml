@@ -1,10 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.minehattan</groupId>
     <artifactId>chatter</artifactId>
     <version>0.1</version>
     <packaging>jar</packaging>
+
+    <properties> <!-- Fix encoding warnings -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <checkstyle.configDir>${basedir}/config/checkstyle/</checkstyle.configDir>
+    </properties>
 
     <!-- Project information -->
     <name>Chatter</name>
@@ -20,9 +25,6 @@
         </license>
     </licenses>
 
-    <properties> <!-- Fix encoding warnings -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <repositories>
         <repository>
@@ -39,10 +41,10 @@
         <dependency> <!-- Bukkit implementation -->
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.6.2-R0.1</version>
+            <version>1.7.9-R0.2</version>
         </dependency>
 
-        <dependency> <!-- Part of the permission support -->
+        <dependency>
             <groupId>de.bananaco</groupId>
             <artifactId>bPermissions</artifactId>
             <version>2.9.1</version>
@@ -50,35 +52,35 @@
     </dependencies>
 
     <build>
-        <defaultGoal>install</defaultGoal>
-        <finalName>${project.name}</finalName>
-
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>plugin.yml</include>
-                    <include>config.yml</include>
-                </includes>
-            </resource>
-        </resources>
+        <defaultGoal>clean install</defaultGoal>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.3.2</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.15</version>
+                <executions>
+                    <execution>
+                        <id>verify-style</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
+                    <propertyExpansion>checkstyleConfigDir=${checkstyle.configDir}</propertyExpansion>
+                    <configLocation>${checkstyle.configDir}/checkstyle.xml</configLocation>
                 </configuration>
             </plugin>
         </plugins>
